@@ -1,5 +1,5 @@
 # Euler-Project
 
-My submissions to the Project Euler challenges, written in python.
+My solutions to the Project Euler challenges, written in Python and Nim.
 
 https://projecteuler.net/about
