@@ -15,12 +15,12 @@ def solution(n: int) -> int:
     while True:
         if n % next_factor == 0:
             prime_factors.append(next_factor)
-            n = n / next_factor
+            n /= next_factor
         else:
             if next_factor >= n:
                 break
             next_factor += 1
-    return prime_factors[len(prime_factors) - 1]
+    return prime_factors[-1]
 
 if __name__ == "__main__":
     print(solution(600851475143))

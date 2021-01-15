@@ -33,4 +33,4 @@ def solution(digits: int) -> int:
     return palindromes[0]
 
 if __name__ == "__main__":
-    print(solution(4))
+    print(solution(3))
