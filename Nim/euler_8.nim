@@ -1,4 +1,4 @@
-"""
+#[
 EULER PROJECT PROBLEM 8
 
 Largest product in a series
@@ -29,37 +29,34 @@ product are 9 × 9 × 8 × 9 = 5832.
 
 Find the thirteen adjacent digits in the 1000-digit number that have
 the greatest product. What is the value of this product?
+]#
 
-"""
+import math, strutils 
 
-foo = []
+const fileContents = staticRead("../Inputs/euler_8.txt")
+var number : string
 
-with open("Inputs\\euler_8.txt") as file:
-    for line in file:
-        for char in line:
-            if char != '\n':
-                foo.append(char)
+for item in splitWhitespace(fileContents):
+    number.add(item)
 
-
-def solution(digits: int, num: list) -> int:
-    greatest_sum = 0
-    for i in range(len(num)):
-        if i + digits >= len(num):
+proc solution(n: string, digits: int): int =
+    var nextSet : seq[int]
+    var highest = 0
+    var total = 1
+    for i in 0..(len(n) - 1):
+        if i + digits >= len(n):
             break
-        next_set = []
-        mult_sum = 1
-        for j in range(digits):
-            if num[i + j] == '0':
-                next_set = []
-                break
-            else:
-                next_set.append(int(num[i + j]))
-        for x in range(len(next_set)):
-            mult_sum *= next_set[x]
-        if mult_sum > greatest_sum:
-            greatest_sum = mult_sum
-    return greatest_sum
+        else:
+            if ('0' notin n[i .. (i + (digits - 1))]):
+                total = 1
+                newSeq(nextSet, digits) # Reset the sequence
+                for j in 0..(digits - 1):
+                    # Get actual number, not unicode
+                    nextSet[j] = (int(n[i + j]) - 48)
+                total = prod(nextSet)
+                if total > highest:
+                    highest = total
+    return highest
 
-
-if __name__ == "__main__":
-    print(solution(13, foo))
+when isMainModule:
+    echo solution(number, 13)
